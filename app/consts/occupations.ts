@@ -98,6 +98,12 @@ export const OCCUPATIONS = {
       { choose: 4, from: "any" },
     ]
   },
+  custom:{
+    label:"Custom",
+    skills:[
+        {choose:8,from: "any"}
+    ]
+  }
 } as const
 
 export type OccupationKey = keyof typeof OCCUPATIONS
