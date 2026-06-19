@@ -1,7 +1,8 @@
-import { BASE_SKILLS } from "@/app/consts/character"
-import { OccupationSkill } from "@/app/consts/occupations"
+import { BASE_SKILLS } from "@/lib/consts/character"
+import { OccupationSkill } from "@/types/occupation"
 
-function renderSkill(s: OccupationSkill) {
+
+export function renderSkill(s: OccupationSkill) {
   if (typeof s === "string") 
     return BASE_SKILLS[s].label                          // "History"
   if ("specialization" in s) 

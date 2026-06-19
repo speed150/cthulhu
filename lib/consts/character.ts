@@ -85,16 +85,3 @@ export const BASE_SKILLS = {
     throw: { label: "Throw", base: 20 },
     track: { label: "Track", base: 10 },
 }
-export type SkillKey = keyof typeof BASE_SKILLS
-
-export type SkillWithSpec = {
-    skill: SkillKey
-    specialization: string  
-}
-type BaseSkillValue =
-    | number                                    
-    | { spec: string; value: number }[]        
-
-type CharacterBaseSkills = {
-    [K in SkillKey]?: BaseSkillValue
-}

@@ -1,4 +1,4 @@
-import { SkillKey } from "@/app/consts/character"
+import { SkillKey } from "@/types/skill"
 
 export const OCCUPATIONS = {
   antiquarian: {
@@ -106,15 +106,3 @@ export const OCCUPATIONS = {
   }
 } as const
 
-export type OccupationKey = keyof typeof OCCUPATIONS
-type SpecializedSkill = {
-  skill: SkillKey
-  specialization: string
-}
-
-type SkillChoice = {
-  choose: number
-  from: SkillKey[] | "any"
-}
-
-export type OccupationSkill = SkillKey | SpecializedSkill | SkillChoice
