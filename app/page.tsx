@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export default function Home() {
   const { data } = useSession();
+  console.log(data)
   if (!data) {
   }
   return (
