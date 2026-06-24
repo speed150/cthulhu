@@ -26,7 +26,7 @@ export default function CharactersLayout({
       >
         <body className="min-h-full flex flex-col">
           <Providers>
-            <Navbar />
+            <Navbar/>
             {children}
           </Providers>
         </body>

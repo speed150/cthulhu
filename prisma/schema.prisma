@@ -23,15 +23,16 @@ model Character {
   residence       String?
   birthplace      String?
   userId          String
-  HP              Int
   maxHP           Int
-  mjWound         Boolean
-  MP              Int
+  HP              Int
+  mjWound         Boolean  @default(false)
   maxMP           Int
+  MP              Int
   luck            Int
   sanity          Int
+  moveRate        Int
   characteristics Json
-  baseSkills      Json
+  skills          Json
   createdAt       DateTime @default(now())
   user            User     @relation(fields: [userId], references: [id])
 }
