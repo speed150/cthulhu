@@ -1,4 +1,4 @@
-import { OCCUPATIONS } from "@/lib/consts/occupations"
+import { OCCUPATIONS } from "@/lib/constsants/occupations"
 import { SkillKey } from "@/types/skill"
 
 export type OccupationKey = keyof typeof OCCUPATIONS

@@ -7,16 +7,16 @@ import Link from "next/link"
 
 export default function RegisterPage() {
   const router = useRouter()
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault()
     setError("")
-
+    console.log(username,password)
     if (password !== confirmPassword) {
       setError("Passwords don't match")
       return
@@ -33,9 +33,9 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username, password })
       })
-
+      
       const data = await res.json()
 
       if (!res.ok) {
@@ -62,11 +62,11 @@ export default function RegisterPage() {
         )}
 
         <div>
-          <label className="block text-sm font-medium mb-1">E-mail</label>
+          <label className="block text-sm font-medium mb-1">Username</label>
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             className="w-full border rounded px-3 py-2"
           />

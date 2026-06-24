@@ -1,4 +1,4 @@
-import { BASE_SKILLS } from "@/lib/consts/character"
+import { BASE_SKILLS } from "@/lib/constsants/characteristics"
 
 export type SkillKey = keyof typeof BASE_SKILLS
 

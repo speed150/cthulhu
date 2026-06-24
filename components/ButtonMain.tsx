@@ -13,8 +13,9 @@ export function ButtonMain({
     <>
       {
         <Link
-          className={
+          className={`${
             mainColor ? "button button-main" : "button button-secondary"
+            } main-width`
           }
           href={href}
         >
