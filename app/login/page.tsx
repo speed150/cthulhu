@@ -74,7 +74,7 @@ export default function LoginPage() {
         <p className="text-sm text-center">
           Don't have an account?{" "}
           <Link href="/register" className="underline">
-            Login
+            Register
           </Link>
         </p>
       </form>

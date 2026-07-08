@@ -20,17 +20,12 @@ export default function CharactersLayout({
 }) {
   return (
     <>
-      <html
-        lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      >
-        <body className="min-h-full flex flex-col">
-          <Providers>
-            <Navbar/>
-            {children}
-          </Providers>
-        </body>
-      </html>
+      <Providers>
+        <div className="grow">
+          <Navbar />
+          {children}
+        </div>
+      </Providers>
     </>
   );
 }

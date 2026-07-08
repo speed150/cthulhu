@@ -102,7 +102,7 @@ function SlotRow({
         <span className="text-sm text-stone-600 whitespace-nowrap">{BASE_SKILLS[slot.skill].label}:</span>
         <input
           className="input flex-1"
-          placeholder="np. French"
+          placeholder={`np. ${Object.hasOwn(BASE_SKILLS[slot.skill],'specializations') ? BASE_SKILLS[slot.skill].specializations[0]:""}`}
           value={customSpecText[slot.id] || ""}
           onChange={(e) => onCustomSpecChange(slot.id, e.target.value)}
         />

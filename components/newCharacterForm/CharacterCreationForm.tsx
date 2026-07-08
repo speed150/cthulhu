@@ -3,7 +3,7 @@
 import {
   FORM_STEPS,
   FormProgress,
-} from "@/components/newCharacterForm/FormProggress";
+} from "@/components/newCharacterForm/FormProgress";
 import {
   isBasicInfoStepComplete,
   StepBasicInfo,
@@ -54,7 +54,6 @@ export function CharacterCreationForm() {
   async function handleSubmit() {
     setSubmitError("");
     setSubmitting(true);
-
     try {
       const payload = buildCreateCharacterPayload(formState);
 
@@ -65,7 +64,6 @@ export function CharacterCreationForm() {
       });
 
       const data = await res.json();
-
       if (!res.ok) {
         setSubmitError(data.error || "Nie udało się utworzyć postaci");
         setSubmitting(false);
@@ -74,6 +72,7 @@ export function CharacterCreationForm() {
 
       router.push(`/characters/${data.id}`);
     } catch (err) {
+      console.log(err)
       setSubmitError("Błąd połączenia z serwerem");
       setSubmitting(false);
     }

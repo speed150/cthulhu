@@ -16,7 +16,6 @@ export default function RegisterPage() {
   async function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault()
     setError("")
-    console.log(username,password)
     if (password !== confirmPassword) {
       setError("Passwords don't match")
       return
@@ -47,6 +46,7 @@ export default function RegisterPage() {
       // rejestracja ok -> przekieruj na login
       router.push("/login?registered=true")
     } catch (err) {
+      console.log(err)
       setError("Error connection to the server")
       setLoading(false)
     }

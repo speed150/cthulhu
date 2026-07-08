@@ -2,6 +2,7 @@ import { CharacterFormState } from "@/lib/constsants/character-form";
 import { calculateDerivedStats } from "@/lib/constsants/characteristics";
 import { SkillChoiceOption, OCCUPATIONS, OccupationKey, OccupationSkill } from "@/lib/constsants/occupations";
 import { BASE_SKILLS, SKILL_KEYS, SkillKey } from "@/lib/constsants/skills";
+import { randomInt } from "crypto";
 
 export type ResolvedSlot =
   | { id: string; type: "fixed"; skill: SkillKey }
@@ -195,21 +196,31 @@ export function buildSpecializationsSummary(state: CharacterFormState): { skill:
 
   return result
 }
-
+function genLuck() {
+  let res = 0
+  for (let i = 0; i < 3; i++) {
+    res += (Math.floor(Math.random()*6)+1) * 5
+  }
+  return res
+}
 // ===== Payload finalny do wysłania do API =====
 
 export function buildCreateCharacterPayload(state: CharacterFormState) {
   const derived = calculateDerivedStats(state.characteristics)
   return {
     name: state.basicInfo.name.trim(),
-    player: state.basicInfo.player.trim() || null,
     age: state.basicInfo.age ? Number(state.basicInfo.age) : null,
     residence: state.basicInfo.residence.trim() || null,
     birthplace: state.basicInfo.birthplace.trim() || null,
     characteristics: state.characteristics,
-    derived,
+    maxHP: derived.hp,
+    HP: derived.hp,
+    maxMP: derived.mp,
+    MP: derived.mp,
+    sanity: derived.sanity,
+    luck: genLuck(),
+    moveRate: derived.moveRate,
     occupation: state.occupationKey as OccupationKey,
-    specializations: buildSpecializationsSummary(state),
     skills: buildFinalSkillValues(state),
   }
 }

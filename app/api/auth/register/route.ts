@@ -1,37 +1,18 @@
-
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import bcrypt from "bcryptjs"
 
 export async function POST(request: Request) {
-  const session = await getServerSession(authOptions)
-
-  if (!session?.user?.id) {
-    return Response.json({ error: "Unauthorized" }, { status: 401 })
+  const { username, password } = await request.json()
+  if (!username || !password) {
+    return Response.json({ error: "Username and password cannot be empty" }, { status: 400 })
   }
-
-  const body = await request.json()
-
-  const character = await prisma.character.create({
-    data: {
-      ...body,
-      userId: session.user.id
-    }
-  })
-
-  return Response.json(character)
-}
-
-export async function GET() {
-  const session = await getServerSession(authOptions)
-
-  if (!session?.user?.id) {
-    return Response.json({ error: "Unauthorized" }, { status: 401 })
+  const existing = await prisma.user.findUnique({ where: { username } })
+  if (existing) {
+    return Response.json({ error: "E-mail already taken" }, { status: 400 })
   }
-
-  const characters = await prisma.character.findMany({
-    where: { userId: session.user.id }
+  const hashedPassword = await bcrypt.hash(password, 10)
+  const user = await prisma.user.create({
+    data: { username, password: hashedPassword }
   })
-
-  return Response.json(characters)
+  return Response.json({ id: user.id, email: user.username })
 }
